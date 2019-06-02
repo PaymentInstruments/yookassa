@@ -1,6 +1,7 @@
-require 'yandex-checkout/version'
+# frozen_string_literal: true
 
-module YandexCheckout
-  class Error < StandardError; end
-    # Your code goes here...
-end
+require 'evil/client'
+
+require 'yandex-checkout/version'
+require 'yandex-checkout/payment'
+require 'yandex-checkout/refund'
