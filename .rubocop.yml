@@ -1,0 +1,13 @@
+AllCops:
+  TargetRubyVersion: 2.5
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/LineLength:
+  Max: 100
+
+Naming/FileName:
+  Exclude:
+    - 'lib/*.rb'
