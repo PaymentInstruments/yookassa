@@ -1,0 +1,22 @@
+# frozen_string_literal: true
+
+module YandexCheckout
+  class Response
+    extend Dry::Initializer
+    option :id, proc(&:to_s)
+    option :status, proc(&:to_s), default: proc { nil }
+    option :test
+
+    class << self
+      def build(*res)
+        body = res.last
+        binding.pry
+        new JSON.parse(body.first)
+      end
+
+      def new(opts)
+        super opts.each_with_object({}) { |(key, val), obj| obj[key.to_sym] = val }
+      end
+    end
+  end
+end

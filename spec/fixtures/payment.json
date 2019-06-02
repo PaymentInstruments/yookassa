@@ -1,0 +1,14 @@
+{
+  "amount": {
+    "value": "10.00",
+    "currency": "RUB"
+  },
+  "payment_method_data": {
+    "type": "bank_card"
+  },
+  "confirmation": {
+    "type": "redirect",
+    "return_url": "https://www.merchant-website.com/return_url"
+  },
+  "description": "Заказ №72"
+}
