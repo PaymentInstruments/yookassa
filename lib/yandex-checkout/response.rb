@@ -10,7 +10,6 @@ module YandexCheckout
     class << self
       def build(*res)
         body = res.last
-        binding.pry
         new JSON.parse(body.first)
       end
 

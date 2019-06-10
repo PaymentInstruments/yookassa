@@ -8,41 +8,13 @@ module YandexCheckout
     path { 'https://payment.yandex.net/api/v3' }
     security { basic_auth shop_id, api_key }
 
-    # http_method { :get }
-    # scope :payments do
-    # operation :status do
-    #   option :payment_id, proc(&:to_s)
-
-    #   http_method :get
-    #   path { "payments/#{payment_id}" }
-
-    #   response 200 do |_status, _headers, body|
-    #     p JSON.parse(*body)
-    #   end
-
-    #   # Parses json response, wraps it into model with [#error] and raises
-    #   # an exception where [ResponseError#response] contains the model instance
-
-    #   response(400, 422) do |(status, *)|
-    #     raise "#{status}: Record invalid"
-    #   end
-
-    #   response(404) do |(_status, *)|
-    #     p 'Record Not Found'
-    #     # raise "#{status}: Record not found"
-    #   end
-    # end
-
     operation :get_payment_info do
       option :payment_id, proc(&:to_s)
 
       http_method :get
       path { "payments/#{payment_id}" }
 
-      # response 200 do |_status, _headers, body|
-      #   p JSON.parse(*body)
-      # end
-      response(200) { |*res| p Response.build(*res) }
+      response(200) { |*res| Entity::Payment.build(*res) }
 
       # Parses json response, wraps it into model with [#error] and raises
       # an exception where [ResponseError#response] contains the model instance
