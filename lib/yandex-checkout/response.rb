@@ -5,7 +5,6 @@ module YandexCheckout
     extend Dry::Initializer
     option :id, proc(&:to_s)
     option :status, proc(&:to_s), default: proc { nil }
-    option :test
 
     class << self
       def build(*res)
