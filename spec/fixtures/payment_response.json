@@ -1,0 +1,28 @@
+{
+  "id": "2490ded1-000f-5000-8000-1f64111bc63e",
+  "status": "pending",
+  "paid": false,
+  "amount": {
+    "value": "10.00",
+    "currency": "RUB"
+  },
+  "confirmation": {
+    "type": "redirect",
+    "return_url": "https://url.test",
+    "confirmation_url": "https://money.yandex.ru/payments/external/confirmation?orderId=2490ded1-000f-5000-8000-1f64111bc63e"
+  },
+  "created_at": "2019-06-10T21:26:41.395Z",
+  "metadata": {
+  },
+  "payment_method": {
+    "type": "bank_card",
+    "id": "2490ded1-000f-5000-8000-1f64111bc63e",
+    "saved": false
+  },
+  "recipient": {
+    "account_id": "54401",
+    "gateway_id": "289250"
+  },
+  "refundable": false,
+  "test": true
+}
