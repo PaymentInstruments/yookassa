@@ -3,14 +3,14 @@
 RSpec.describe YandexCheckout::Payment do
   describe '#create' do
     let(:settings) { { shop_id: 'SHOP_ID', api_key: 'API_KEY' } }
-    let(:idempotence_key) { 12_345 }
+    let(:idempotency_key) { 12_345 }
     let(:payment) { described_class.new(settings) }
     let(:params) { { payment: File.read('spec/fixtures/payment.json') } }
     let(:url) { 'https://payment.yandex.net/api/v3/payments' }
     let(:body) { File.read('spec/fixtures/payment_response.json') }
 
     before  { stub_request(:any, //).to_return(body: body) }
-    subject { payment.create(payment: params, idempotency_key: idempotence_key) }
+    subject { payment.create(payment: params, idempotency_key: idempotency_key) }
 
     it 'sends a request' do
       subject

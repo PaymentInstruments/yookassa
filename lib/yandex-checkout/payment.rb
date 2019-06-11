@@ -15,44 +15,21 @@ module YandexCheckout
       path { "/#{payment_id}" }
 
       response(200) { |*res| Entity::Payment.build(*res) }
-
       response(400, 404) { |*res| Error.build(*res) }
-      # Parses json response, wraps it into model with [#error] and raises
-      # an exception where [ResponseError#response] contains the model instance
-
-      # response(400, 422) do |(status, *)|
-      #   raise "#{status}: Record invalid"
-      # end
-
-      # response(404) do |(_status, *)|
-      #   p 'Record Not Found'
-      #   # raise "#{status}: Record not found"
-      # end
     end
 
     operation :create do
       option :payment
-      option :idempotency_key, optional: true
+      option :idempotency_key, proc(&:to_s)
 
       http_method :post
 
-      # path { 'payments' }
-      # query { { params: params } }
       format 'json'
-      headers 'Idempotence-Key' => '244afbdc-000f-5000-a000-12526186ce10'
+      headers { { 'Idempotence-Key' => idempotency_key } }
       body { payment }
 
-      # response 200 do |_status, _headers, body|
-      #   p JSON.parse(*body)
-      # end
       response(200) { |*res| Entity::Payment.build(*res) }
       response(400) { |*res| Error.build(*res) }
-      # Parses json response, wraps it into model with [#error] and raises
-      # an exception where [ResponseError#response] contains the model instance
-
-      # response(400, 422) do |(status, *)|
-      #   raise "#{status}: Record invalid"
-      # end
     end
 
     operation :capture do
@@ -64,7 +41,7 @@ module YandexCheckout
       path { "/#{payment_id}/capture" }
 
       format 'json'
-      headers 'Idempotence-Key' => '244afbdc-000f-5000-a000-12526186ce10'
+      headers { { 'Idempotence-Key' => idempotency_key } }
 
       response(200) { |*res| Entity::Payment.build(*res) }
       response(400) { |*res| Error.build(*res) }
@@ -79,7 +56,7 @@ module YandexCheckout
       path { "/#{payment_id}/cancel" }
 
       format 'json'
-      headers 'Idempotence-Key' => '244afbdc-000f-5000-a000-12526186ce10'
+      headers { { 'Idempotence-Key' => idempotency_key } }
 
       response(200) { |*res| Entity::Payment.build(*res) }
       response(400) { |*res| Error.build(*res) }
