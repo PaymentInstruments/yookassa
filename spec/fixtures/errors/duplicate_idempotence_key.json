@@ -1,0 +1,7 @@
+{
+  "type": "error",
+  "id": "afd4a246-ba97-4412-aa19-f5def9322f8b",
+  "code": "invalid_request",
+  "description": "Idempotence key duplicated",
+  "parameter": "Idempotence-Key"
+}

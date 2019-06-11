@@ -1,0 +1,7 @@
+{
+  "type": "error",
+  "id": "85e254dd-e1e5-40c9-82c0-9f59f4130828",
+  "code": "invalid_request",
+  "description": "Payment not found or forbidden",
+  "parameter": "payment_id"
+}
