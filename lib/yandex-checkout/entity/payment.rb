@@ -14,7 +14,7 @@ module YandexCheckout
       option :expires_at, optional: true
       option :description, proc(&:to_s), optional: true
       option :metadata, optional: true
-      option :payment_method, Entity::PaymentMethod
+      option :payment_method, Entity::PaymentMethod, optional: true
       option :confirmation, Entity::Confirmation, optional: true
       option :test
     end
