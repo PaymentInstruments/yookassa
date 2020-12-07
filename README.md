@@ -1,7 +1,9 @@
 # YooKassa API Ruby Client
 
-[![Gem Version][gem-badger]][gem]
 [![Yookassa](https://circleci.com/gh/paderinandrey/yookassa.svg?style=svg)](https://circleci.com/gh/paderinandrey/yookassa)
+[![Gem Version][gem-badger]][gem]
+[![License](https://img.shields.io/github/license/paderinandrey/yookassa.svg)](https://github.com/paderinandrey/yookassa)
+
 
 [gem-badger]: https://img.shields.io/gem/v/yookassa.svg?style=flat&color=blue
 [gem]: https://rubygems.org/gems/yookassa
@@ -24,7 +26,41 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+# Payment
+
+client = Yookassa::Payment.new(shop_id: 'shop_id', api_key: 'api_key')
+
+payment = {
+    amount: {
+        value:    100,
+        currency: 'RUB'
+    },
+    capture:      true,
+    confirmation: {
+        type:       'redirect',
+        return_url: return_url
+    }
+}
+
+client.create(payment: payment)
+
+client.get_payment_info(payment_id: '12345')
+
+client.capture(payment_id: '12345')
+
+client.cancel(payment_id: '12345')
+
+# Refund
+
+client = Yookassa::Refund.new(shop_id: 'shop_id', api_key: 'api_key')
+
+client.create(payload: payload)
+
+client.get_refund_info(payment_id: '12345')
+
+
+```
 
 ## Contributing
 
