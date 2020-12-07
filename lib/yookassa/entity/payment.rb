@@ -4,9 +4,9 @@ require_relative './amount'
 require_relative './payment_method'
 require_relative './confirmation'
 
-module YandexCheckout
+module Yookassa
   module Entity
-    class Payment < YandexCheckout::Response
+    class Payment < Yookassa::Response
       option :paid
       option :amount, Entity::Amount
       option :created_at

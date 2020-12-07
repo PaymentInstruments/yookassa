@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 begin
   require 'pry'
 rescue LoadError
   nil
 end
 
-require 'yandex-checkout'
+require 'yookassa'
 require 'webmock/rspec'
 
 RSpec.configure do |config|

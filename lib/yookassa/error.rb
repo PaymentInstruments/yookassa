@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-module YandexCheckout
+module Yookassa
   class Error
     extend  Dry::Initializer
-    extend  YandexCheckout::Callable
-    include YandexCheckout::Optional
+    extend  Yookassa::Callable
+    include Yookassa::Optional
 
     option :type, proc(&:to_s)
     option :id, proc(&:to_s), optional: true

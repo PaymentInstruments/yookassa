@@ -2,16 +2,16 @@
 
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'yandex-checkout/version'
+require 'yookassa/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'yandex-checkout'
-  spec.version       = YandexCheckout::VERSION
+  spec.name          = 'yookassa'
+  spec.version       = Yookassa::VERSION
   spec.authors       = 'Andrey Paderin'
   spec.email         = 'andy.paderin@gmail.com'
 
-  spec.summary       = 'This product is used for managing payments under The Yandex.Checkout API For usage by those who implemented Yandex.Checkout using the API method.'
-  spec.homepage      = 'https://github.com/paderinandrey/yandex-checkout'
+  spec.summary       = 'This product is used for managing payments under The Yookassa API For usage by those who implemented Yookassa using the API method.'
+  spec.homepage      = 'https://github.com/paderinandrey/yookassa'
   spec.license       = 'MIT'
 
   spec.files            = `git ls-files`.split($INPUT_RECORD_SEPARATOR)

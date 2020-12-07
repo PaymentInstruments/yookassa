@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module YandexCheckout
+module Yookassa
   module Entity
     class Card
       extend  Dry::Initializer
-      extend  YandexCheckout::Callable
-      include YandexCheckout::Optional
+      extend  Yookassa::Callable
+      include Yookassa::Optional
 
       option :first6
       option :last4

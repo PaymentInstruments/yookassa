@@ -2,9 +2,9 @@
 
 require_relative './amount'
 
-module YandexCheckout
+module Yookassa
   module Entity
-    class Refund < YandexCheckout::Response
+    class Refund < Yookassa::Response
       option :payment_id
       option :created_at, proc(&:to_s)
       option :amount, Entity::Amount

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module YandexCheckout
+module Yookassa
   class Refund < Evil::Client
     option :shop_id,  proc(&:to_s)
     option :api_key,  proc(&:to_s)
 
-    path { 'https://payment.yandex.net/api/v3/refunds' }
+    path { 'https://api.yookassa.ru/v3/refunds' }
     security { basic_auth shop_id, api_key }
 
     operation :get_refund_info do

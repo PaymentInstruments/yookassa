@@ -2,12 +2,12 @@
 
 require_relative './card'
 
-module YandexCheckout
+module Yookassa
   module Entity
     class PaymentMethod
       extend  Dry::Initializer
-      extend  YandexCheckout::Callable
-      include YandexCheckout::Optional
+      extend  Yookassa::Callable
+      include Yookassa::Optional
 
       option :type, proc(&:to_s)
       option :id, proc(&:to_s)

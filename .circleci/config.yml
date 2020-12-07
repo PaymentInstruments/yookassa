@@ -1,0 +1,28 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+    executor: ruby/default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yookassa-bundle-{{ checksum "Gemfile.lock" }}
+            - yookassa-bundle-
+      - run:
+          name: Install dependencies
+          command: |
+            bundle check || bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: yookassa-bundle-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Run tests
+          command: |
+            bundle exec rspec --profile 10 --format progress
