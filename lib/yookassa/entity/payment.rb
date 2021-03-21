@@ -7,6 +7,10 @@ require_relative './confirmation'
 module Yookassa
   module Entity
     class Payment < Yookassa::Response
+      extend  Dry::Initializer
+      extend  Yookassa::Callable
+      include Yookassa::Optional
+
       option :paid
       option :amount, Entity::Amount
       option :created_at

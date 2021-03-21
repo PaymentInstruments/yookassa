@@ -11,6 +11,7 @@ require 'yookassa/callable'
 require 'yookassa/optional'
 require 'yookassa/entity/payment'
 require 'yookassa/entity/refund'
+require 'yookassa/entity/notification'
 require 'yookassa/error'
 
 module Yookassa
