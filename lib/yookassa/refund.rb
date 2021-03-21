@@ -2,8 +2,8 @@
 
 module Yookassa
   class Refund < Evil::Client
-    option :shop_id,  proc(&:to_s)
-    option :api_key,  proc(&:to_s)
+    option :shop_id,  proc(&:to_s), default: proc { Yookassa.config.shop_id }
+    option :api_key,  proc(&:to_s), default: proc { Yookassa.config.api_key }
 
     path { 'https://api.yookassa.ru/v3/refunds' }
     security { basic_auth shop_id, api_key }
