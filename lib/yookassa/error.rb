@@ -13,7 +13,7 @@ module Yookassa
     option :parameter, proc(&:to_s), optional: true
 
     def error?
-      type == 'error'
+      type == "error"
     end
 
     class << self
@@ -23,7 +23,7 @@ module Yookassa
       end
 
       def new(opts)
-        super opts.each_with_object({}) { |(key, val), obj| obj[key.to_sym] = val }
+        super opts.transform_keys(&:to_sym)
       end
     end
   end

@@ -5,7 +5,7 @@ module Yookassa
     option :shop_id,  proc(&:to_s)
     option :api_key,  proc(&:to_s)
 
-    path { 'https://api.yookassa.ru/v3/payments' }
+    path { "https://api.yookassa.ru/v3/payments" }
     security { basic_auth shop_id, api_key }
 
     operation :get_payment_info do
@@ -24,8 +24,8 @@ module Yookassa
 
       http_method :post
 
-      format 'json'
-      headers { { 'Idempotence-Key' => idempotency_key } }
+      format "json"
+      headers { { "Idempotence-Key" => idempotency_key } }
       body { payment }
 
       response(200) { |*res| Entity::Payment.build(*res) }
@@ -40,8 +40,8 @@ module Yookassa
 
       path { "/#{payment_id}/capture" }
 
-      format 'json'
-      headers { { 'Idempotence-Key' => idempotency_key } }
+      format "json"
+      headers { { "Idempotence-Key" => idempotency_key } }
 
       response(200) { |*res| Entity::Payment.build(*res) }
       response(400) { |*res| Error.build(*res) }
@@ -55,8 +55,8 @@ module Yookassa
 
       path { "/#{payment_id}/cancel" }
 
-      format 'json'
-      headers { { 'Idempotence-Key' => idempotency_key } }
+      format "json"
+      headers { { "Idempotence-Key" => idempotency_key } }
 
       response(200) { |*res| Entity::Payment.build(*res) }
       response(400) { |*res| Error.build(*res) }

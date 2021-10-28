@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative './amount'
-require_relative './payment_method'
-require_relative './confirmation'
+require_relative "./amount"
+require_relative "./payment_method"
+require_relative "./confirmation"
 
 module Yookassa
   module Entity

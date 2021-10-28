@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './amount'
+require_relative "./amount"
 
 module Yookassa
   module Entity
