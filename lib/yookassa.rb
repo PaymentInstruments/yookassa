@@ -11,3 +11,14 @@ require "yookassa/optional"
 require "yookassa/entity/payment"
 require "yookassa/entity/refund"
 require "yookassa/error"
+require "yookassa/config"
+
+module Yookassa
+  def self.configure
+    yield(config)
+  end
+
+  def self.config
+    @config ||= Config.new
+  end
+end
