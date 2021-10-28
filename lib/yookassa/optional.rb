@@ -5,7 +5,7 @@ module Yookassa
     private
 
     def initialize(opts)
-      super opts.each_with_object({}) { |(key, val), obj| obj[key.to_sym] = val }
+      super opts.transform_keys(&:to_sym)
     end
 
     def __options__

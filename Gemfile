@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
@@ -8,6 +8,11 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 gemspec
 
 group :development, :test do
-  gem 'pry',        platform: :mri
-  gem 'pry-byebug', platform: :mri
+  gem "pry"
+  gem "pry-byebug"
+  gem "rake", "~> 13.0"
+  gem "rspec", "~> 3.0"
+  gem "rubocop", "~> 1.21"
+  gem "rubocop-rake", "~> 0.6.0"
+  gem "rubocop-rspec", "~> 2.5"
 end
