@@ -1,6 +1,5 @@
 # YooKassa API Ruby Client
-
-[![Yookassa](https://github.com/PaymentInstruments/yookassa/actions/workflows/main/badge.svg)](https://github.com/PaymentInstruments/yookassa)
+[![Github Actions](https://github.com/PaymentInstruments/yookassa/actions/workflows/main.yml/badge.svg)](https://github.com/PaymentInstruments/yookassa/actions/workflows/main.yml)
 [![Gem Version][gem-badger]][gem]
 [![License](https://img.shields.io/github/license/paderinandrey/yookassa.svg)](https://github.com/paderinandrey/yookassa)
 
