@@ -9,10 +9,10 @@ gemspec
 
 group :development, :test do
   gem "pry"
-  gem "pry-byebug"
+  gem "pry-byebug", "~> 3.8.0"
   gem "rake", "~> 13.0"
-  gem "rspec", "~> 3.0"
-  gem "rubocop", "~> 1.21"
+  gem "rspec", "~> 3.5"
+  gem "rubocop", "~> 1.22"
   gem "rubocop-rake", "~> 0.6.0"
   gem "rubocop-rspec", "~> 2.5"
   gem "webmock", "~> 3.14"
