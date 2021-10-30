@@ -24,7 +24,4 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "dry-initializer"
   spec.add_runtime_dependency "http", "~> 5.0.1"
-
-  spec.add_development_dependency "rspec", "~> 3.5"
-  spec.add_development_dependency "simplecov", "~> 0.16"
 end

@@ -15,25 +15,25 @@ module Yookassa
 
     def get_payment_info(payment_id:)
       get("payments/#{payment_id}") do |response|
-        Entity::Payment.new(response)
+        Entity::Payment.new(**response)
       end
     end
 
     def create(payment:, idempotency_key: SecureRandom.hex(10))
       post("payments", payload: payment, idempotency_key: idempotency_key) do |response|
-        Entity::Payment.new(response)
+        Entity::Payment.new(**response)
       end
     end
 
     def capture(payment_id:, idempotency_key: SecureRandom.hex(10))
       post("payments/#{payment_id}/capture", idempotency_key: idempotency_key) do |response|
-        Entity::Payment.new(response)
+        Entity::Payment.new(**response)
       end
     end
 
     def cancel(payment_id:, idempotency_key: SecureRandom.hex(10))
       post("payments/#{payment_id}/cancel", idempotency_key: idempotency_key) do |response|
-        Entity::Payment.new(response)
+        Entity::Payment.new(**response)
       end
     end
 

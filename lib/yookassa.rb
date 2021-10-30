@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "http"
-require "dry/initializer"
+require "dry-initializer"
 require "yookassa/version"
 require "yookassa/payment"
 require "yookassa/refund"

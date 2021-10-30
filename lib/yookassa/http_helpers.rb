@@ -6,18 +6,20 @@ module Yookassa
 
     def get(endpoint, query: {})
       response = client.get("#{API_URL}#{endpoint}", params: query)
+      body = JSON.parse(response.body.to_s, symbolize_names: true)
 
-      return Error.new(response.parse) if response.status.client_error?
+      return Error.new(body) if response.status.client_error?
 
-      yield(response.parse) if block_given?
+      yield(body) if block_given?
     end
 
     def post(endpoint, idempotency_key:, payload: {})
       response = client.headers("Idempotence-Key" => idempotency_key).post("#{API_URL}#{endpoint}", json: payload)
+      body = JSON.parse(response.body.to_s, symbolize_names: true)
 
-      return Error.new(response.parse) if response.status.client_error?
+      return Error.new(body) if response.status.client_error?
 
-      yield(response.parse) if block_given?
+      yield(body) if block_given?
     end
 
     def client

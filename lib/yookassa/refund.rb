@@ -15,13 +15,13 @@ module Yookassa
 
     def get_refund_info(payment_id:)
       get("refunds/#{payment_id}") do |response|
-        Entity::Refund.new(response)
+        Entity::Refund.new(**response)
       end
     end
 
     def create(payload:, idempotency_key: SecureRandom.hex(10))
       post("refunds", payload: payload, idempotency_key: idempotency_key) do |response|
-        Entity::Refund.new(response)
+        Entity::Refund.new(**response)
       end
     end
   end
