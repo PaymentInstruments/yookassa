@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
+require_relative "./types"
+
 module Yookassa
   module Entity
-    class Amount
-      extend  Dry::Initializer
-      extend  Yookassa::Callable
-      include Yookassa::Optional
-
-      option :value, proc(&:to_f), optional: true
-      option :currency, proc(&:to_s), optional: true
+    class Amount < Dry::Struct
+      attribute :value, Types::Coercible::Float
+      attribute :currency, Types::String
     end
   end
 end

@@ -10,7 +10,7 @@ RSpec.describe Yookassa::Refund do
 
   shared_examples "returns_refund_object" do
     it "returns success" do
-      expect(subject).to be_kind_of Yookassa::Response
+      expect(subject).to be_a Yookassa::Entity::Refund
       expect(subject.id).to eq "2491ab0c-0015-5000-9000-1640c7f1a6f0"
       expect(subject.payment_id).to eq "2491a6e2-000f-5000-9000-1480e820ae17"
       expect(subject.status).to eq "succeeded"

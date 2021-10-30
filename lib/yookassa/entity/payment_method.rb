@@ -1,19 +1,16 @@
 # frozen_string_literal: true
 
+require_relative "./types"
 require_relative "./card"
 
 module Yookassa
   module Entity
-    class PaymentMethod
-      extend  Dry::Initializer
-      extend  Yookassa::Callable
-      include Yookassa::Optional
-
-      option :type, proc(&:to_s)
-      option :id, proc(&:to_s)
-      option :saved
-      option :card, Entity::Card, optional: true
-      option :title, proc(&:to_s), optional: true
+    class PaymentMethod < Dry::Struct
+      attribute :type, Types::String
+      attribute :id, Types::String
+      attribute :saved, Types::Bool
+      attribute? :card, Entity::Card
+      attribute? :title, Types::String
     end
   end
 end

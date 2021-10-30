@@ -1,18 +1,16 @@
 # frozen_string_literal: true
 
+require_relative "./types"
+
 module Yookassa
   module Entity
-    class Card
-      extend  Dry::Initializer
-      extend  Yookassa::Callable
-      include Yookassa::Optional
-
-      option :first6
-      option :last4
-      option :expiry_month
-      option :expiry_year
-      option :card_type, proc(&:to_s)
-      option :source, proc(&:to_s), optional: true
+    class Card < Dry::Struct
+      attribute :first6, Types::Integer
+      attribute :last4, Types::Integer
+      attribute :expiry_month, Types::Integer
+      attribute :expiry_year, Types::Integer
+      attribute :card_type, Types::String
+      attribute :source, Types::String
     end
   end
 end
