@@ -1,35 +1,28 @@
 # frozen_string_literal: true
 
+require_relative "http_helpers"
+
 module Yookassa
-  class Refund < Evil::Client
-    option :shop_id,  proc(&:to_s), default: proc { Yookassa.config.shop_id }
-    option :api_key,  proc(&:to_s), default: proc { Yookassa.config.api_key }
+  class Refund
+    include HttpHelpers
 
-    path { "https://api.yookassa.ru/v3/refunds" }
-    security { basic_auth shop_id, api_key }
+    attr_reader :shop_id, :api_key
 
-    operation :get_refund_info do
-      option :payment_id, proc(&:to_s)
-
-      http_method :get
-      path { "/#{payment_id}" }
-
-      response(200) { |*res| Entity::Refund.build(*res) }
-      response(400, 404) { |*res| Error.build(*res) }
+    def initialize(shop_id: Yookassa.config.shop_id, api_key: Yookassa.config.api_key)
+      @shop_id = shop_id
+      @api_key = api_key
     end
 
-    operation :create do
-      option :payload
-      option :idempotency_key, proc(&:to_s)
+    def get_refund_info(payment_id:)
+      get("refunds/#{payment_id}") do |response|
+        Entity::Refund.new(**response)
+      end
+    end
 
-      http_method :post
-
-      format "json"
-      headers { { "Idempotence-Key" => idempotency_key } }
-      body { payload }
-
-      response(200) { |*res| Entity::Refund.build(*res) }
-      response(400, 404) { |*res| Error.build(*res) }
+    def create(payload:, idempotency_key: SecureRandom.hex(10))
+      post("refunds", payload: payload, idempotency_key: idempotency_key) do |response|
+        Entity::Refund.new(**response)
+      end
     end
   end
 end

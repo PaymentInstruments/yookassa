@@ -3,7 +3,10 @@
 RSpec.describe Yookassa::Payment do
   let(:settings) { { shop_id: "SHOP_ID", api_key: "API_KEY" } }
   let(:idempotency_key) { 12_345 }
-  let(:payment) { described_class.new(settings) }
+  let(:payment) { described_class.new(**settings) }
+  let(:body) { File.read("spec/fixtures/payment_response.json") }
+
+  before { stub_request(:any, //).to_return(body: body, headers: { "Content-Type" => "application/json" }) }
 
   shared_examples "returns_payment_object" do
     it "returns success" do
@@ -38,11 +41,9 @@ RSpec.describe Yookassa::Payment do
   end
 
   describe "#create" do
-    let(:params) { { payment: File.read("spec/fixtures/payment.json") } }
+    let(:params) { JSON.parse(File.read("spec/fixtures/payment.json")) }
     let(:url) { "https://api.yookassa.ru/v3/payments" }
-    let(:body) { File.read("spec/fixtures/payment_response.json") }
 
-    before  { stub_request(:any, //).to_return(body: body) }
     subject { payment.create(payment: params, idempotency_key: idempotency_key) }
 
     it "sends a request" do
@@ -56,9 +57,7 @@ RSpec.describe Yookassa::Payment do
   describe "#get_payment_info" do
     let(:payment_id) { "2490ded1-000f-5000-8000-1f64111bc63e" }
     let(:url) { "https://api.yookassa.ru/v3/payments/#{payment_id}" }
-    let(:body) { File.read("spec/fixtures/payment_response.json") }
 
-    before  { stub_request(:any, //).to_return(body: body) }
     subject { payment.get_payment_info(payment_id: payment_id) }
 
     it "sends a request" do
@@ -71,11 +70,8 @@ RSpec.describe Yookassa::Payment do
 
   describe "#capture" do
     let(:payment_id) { "2490ded1-000f-5000-8000-1f64111bc63e" }
-    let(:params) { { payment: File.read("spec/fixtures/payment.json") } }
     let(:url) { "https://api.yookassa.ru/v3/payments/#{payment_id}/capture" }
-    let(:body) { File.read("spec/fixtures/payment_response.json") }
 
-    before  { stub_request(:any, //).to_return(body: body) }
     subject { payment.capture(payment_id: payment_id, idempotency_key: idempotency_key) }
 
     it "sends a request" do
@@ -89,9 +85,7 @@ RSpec.describe Yookassa::Payment do
   describe "#cancel" do
     let(:payment_id) { "2490ded1-000f-5000-8000-1f64111bc63e" }
     let(:url) { "https://api.yookassa.ru/v3/payments/#{payment_id}/cancel" }
-    let(:body) { File.read("spec/fixtures/payment_response.json") }
 
-    before  { stub_request(:any, //).to_return(body: body) }
     subject { payment.cancel(payment_id: payment_id, idempotency_key: idempotency_key) }
 
     it "sends a request" do

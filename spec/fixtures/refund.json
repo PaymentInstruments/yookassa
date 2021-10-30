@@ -1,8 +1,8 @@
 {
   "amount": {
-      "value": "8.00",
-      "currency": "RUB"
-},
-"payment_id": "40484c25-1095-4d36-8b17-92672d1e127d",
+    "value": "8.00",
+    "currency": "RUB"
+  },
+  "payment_id": "40484c25-1095-4d36-8b17-92672d1e127d",
   "description": "test refund, idem-key 40484c25-1095-4d36-8b17-92672d1e127d"
 }

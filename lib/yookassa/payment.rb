@@ -1,65 +1,46 @@
 # frozen_string_literal: true
 
+require_relative "http_helpers"
+
 module Yookassa
-  class Payment < Evil::Client
-    option :shop_id,  proc(&:to_s), default: proc { Yookassa.config.shop_id }
-    option :api_key,  proc(&:to_s), default: proc { Yookassa.config.api_key }
+  class Payment
+    include HttpHelpers
 
-    path { "https://api.yookassa.ru/v3/payments" }
-    security { basic_auth shop_id, api_key }
+    attr_reader :shop_id, :api_key
 
-    operation :get_payment_info do
-      option :payment_id, proc(&:to_s)
-
-      http_method :get
-      path { "/#{payment_id}" }
-
-      response(200) { |*res| Entity::Payment.build(*res) }
-      response(400, 404) { |*res| Error.build(*res) }
+    def initialize(shop_id: Yookassa.config.shop_id, api_key: Yookassa.config.api_key)
+      @shop_id = shop_id
+      @api_key = api_key
     end
 
-    operation :create do
-      option :payment
-      option :idempotency_key, proc(&:to_s)
-
-      http_method :post
-
-      format "json"
-      headers { { "Idempotence-Key" => idempotency_key } }
-      body { payment }
-
-      response(200) { |*res| Entity::Payment.build(*res) }
-      response(400) { |*res| Error.build(*res) }
+    def get_payment_info(payment_id:)
+      get("payments/#{payment_id}") do |response|
+        Entity::Payment.new(**response)
+      end
     end
 
-    operation :capture do
-      option :payment_id, proc(&:to_s)
-      option :idempotency_key, optional: true
-
-      http_method :post
-
-      path { "/#{payment_id}/capture" }
-
-      format "json"
-      headers { { "Idempotence-Key" => idempotency_key } }
-
-      response(200) { |*res| Entity::Payment.build(*res) }
-      response(400) { |*res| Error.build(*res) }
+    def create(payment:, idempotency_key: SecureRandom.hex(10))
+      post("payments", payload: payment, idempotency_key: idempotency_key) do |response|
+        Entity::Payment.new(**response)
+      end
     end
 
-    operation :cancel do
-      option :payment_id, proc(&:to_s)
-      option :idempotency_key, optional: true
-
-      http_method :post
-
-      path { "/#{payment_id}/cancel" }
-
-      format "json"
-      headers { { "Idempotence-Key" => idempotency_key } }
-
-      response(200) { |*res| Entity::Payment.build(*res) }
-      response(400) { |*res| Error.build(*res) }
+    def capture(payment_id:, idempotency_key: SecureRandom.hex(10))
+      post("payments/#{payment_id}/capture", idempotency_key: idempotency_key) do |response|
+        Entity::Payment.new(**response)
+      end
     end
+
+    def cancel(payment_id:, idempotency_key: SecureRandom.hex(10))
+      post("payments/#{payment_id}/cancel", idempotency_key: idempotency_key) do |response|
+        Entity::Payment.new(**response)
+      end
+    end
+
+    # def self.list(shop_id: Yookassa.config.shop_id, api_key: Yookassa.config.api_key)
+    #   get("payments", shop_id: shop_id, api_key: api_key) do |resp|
+    #     resp['items'].map { Entity::Payment.new(_1) }
+    #   end
+    # end
   end
 end
