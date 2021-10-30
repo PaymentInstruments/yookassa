@@ -10,7 +10,7 @@ RSpec.describe Yookassa::Payment do
 
   shared_examples "returns_payment_object" do
     it "returns success" do
-      expect(subject).to be_kind_of Yookassa::Response
+      expect(subject).to be_a Yookassa::Entity::Payment
       expect(subject.id).to eq "2490ded1-000f-5000-8000-1f64111bc63e"
       expect(subject.test).to eq true
       expect(subject.paid).to eq false
@@ -21,17 +21,17 @@ RSpec.describe Yookassa::Payment do
       expect(subject.expires_at).to eq nil
       expect(subject.metadata).to eq({})
 
-      expect(subject.amount).to be_kind_of Yookassa::Entity::Amount
+      expect(subject.amount).to be_a Yookassa::Entity::Amount
       expect(subject.amount.currency).to eq "RUB"
       expect(subject.amount.value).to eq 10.0
 
-      expect(subject.confirmation).to be_kind_of Yookassa::Entity::Confirmation
+      expect(subject.confirmation).to be_a Yookassa::Entity::Confirmation
       expect(subject.confirmation.confirmation_url).to eq "https://money.yookassa.ru/payments/external/confirmation?orderId=2490ded1-000f-5000-8000-1f64111bc63e"
       expect(subject.confirmation.type).to eq "redirect"
       expect(subject.confirmation.return_url).to eq "https://url.test"
       expect(subject.confirmation.enforce).to eq nil
 
-      expect(subject.payment_method).to be_kind_of Yookassa::Entity::PaymentMethod
+      expect(subject.payment_method).to be_a Yookassa::Entity::PaymentMethod
       expect(subject.payment_method.card).to eq nil
       expect(subject.payment_method.id).to eq "2490ded1-000f-5000-8000-1f64111bc63e"
       expect(subject.payment_method.saved).to eq false

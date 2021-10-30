@@ -8,7 +8,7 @@ module Yookassa
       response = client.get("#{API_URL}#{endpoint}", params: query)
       body = JSON.parse(response.body.to_s, symbolize_names: true)
 
-      return Error.new(body) if response.status.client_error?
+      return Entity::Error.new(**body) if response.status.client_error?
 
       yield(body) if block_given?
     end
@@ -17,7 +17,7 @@ module Yookassa
       response = client.headers("Idempotence-Key" => idempotency_key).post("#{API_URL}#{endpoint}", json: payload)
       body = JSON.parse(response.body.to_s, symbolize_names: true)
 
-      return Error.new(body) if response.status.client_error?
+      return Entity::Error.new(**body) if response.status.client_error?
 
       yield(body) if block_given?
     end

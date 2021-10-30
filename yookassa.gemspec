@@ -22,6 +22,6 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.6"
 
-  spec.add_runtime_dependency "dry-initializer"
+  spec.add_runtime_dependency "dry-struct"
   spec.add_runtime_dependency "http", "~> 5.0.1"
 end
