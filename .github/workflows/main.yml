@@ -16,6 +16,7 @@ jobs:
         ruby:
           - 2.6
           - 2.7
+          - 3.0
 
     steps:
     - uses: actions/checkout@v2
@@ -24,5 +25,7 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
-    - name: Cops & Specs
-      run: bin/rake
+    - name: Cops
+      run: bundle exec rubocop
+    - name: Specs
+      run: bundle exec rspec
