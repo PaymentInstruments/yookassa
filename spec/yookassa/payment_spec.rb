@@ -16,7 +16,7 @@ RSpec.describe Yookassa::Payment do
       expect(subject.paid).to eq false
       expect(subject.status).to eq "pending"
       expect(subject.captured_at).to eq nil
-      expect(subject.created_at).to eq "2019-06-10T21:26:41.395Z"
+      expect(subject.created_at).to eq DateTime.parse("2019-06-10T21:26:41.395Z")
       expect(subject.description).to eq nil
       expect(subject.expires_at).to eq nil
       expect(subject.metadata).to eq({})
@@ -31,7 +31,8 @@ RSpec.describe Yookassa::Payment do
       expect(subject.confirmation.return_url).to eq "https://url.test"
       expect(subject.confirmation.enforce).to eq nil
 
-      expect(subject.payment_method).to be_a Yookassa::Entity::PaymentMethod
+      expect(Yookassa::Entity::PaymentMethods.valid?(subject.payment_method)).to be_truthy
+      expect(subject.payment_method).to be_a(Yookassa::Entity::PaymentMethod::BankCard)
       expect(subject.payment_method.card).to eq nil
       expect(subject.payment_method.id).to eq "2490ded1-000f-5000-8000-1f64111bc63e"
       expect(subject.payment_method.saved).to eq false
