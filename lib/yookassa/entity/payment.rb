@@ -2,8 +2,12 @@
 
 require_relative "./types"
 require_relative "./amount"
-require_relative "./payment_method"
+require_relative "./payment_methods"
 require_relative "./confirmation"
+require_relative "./recipient"
+require_relative "./cancelation_details"
+require_relative "./authorization_details"
+require_relative "./transfer"
 
 module Yookassa
   module Entity
