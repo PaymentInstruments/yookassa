@@ -1,22 +1,31 @@
 # frozen_string_literal: true
 
-require "http"
 require "dry-struct"
+require "forwardable"
 require "yookassa/version"
-require "yookassa/payment"
-require "yookassa/refund"
-require "yookassa/entity/payment"
-require "yookassa/entity/refund"
-require "yookassa/entity/error"
 require "yookassa/config"
-require "yookassa/http_helpers"
+require "yookassa/client"
 
 module Yookassa
-  def self.configure
-    yield(config)
-  end
+  ConfigError = Class.new(StandardError)
 
-  def self.config
-    @config ||= Config.new
+  class << self
+    extend Forwardable
+
+    def configure
+      yield(config)
+    end
+
+    def config
+      @config ||= Config.new
+    end
+
+    def client
+      raise ConfigError, "Specify `shop_id` and `api_key` settins in a `.configure` block" if @config.nil?
+
+      @client ||= Client.new(shop_id: @config.shop_id, api_key: @config.api_key)
+    end
+
+    def_delegators :client, :payments, :refunds
   end
 end
