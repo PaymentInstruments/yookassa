@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Yookassa::Payment do
-  let(:settings) { { shop_id: "SHOP_ID", api_key: "API_KEY" } }
-  let(:idempotency_key) { 12_345 }
-  let(:payment) { described_class.new(**settings) }
+RSpec.describe Yookassa::Payments do
+  let(:config) { { shop_id: "SHOP_ID", api_key: "API_KEY" } }
+  let(:client) { Yookassa::Client.new(**config) }
+  let(:idempotency_key) { SecureRandom.hex(1) }
+
+  let(:payment) { client.payments }
   let(:body) { File.read("spec/fixtures/payment_response.json") }
 
   before { stub_request(:any, //).to_return(body: body, headers: { "Content-Type" => "application/json" }) }
@@ -55,11 +57,11 @@ RSpec.describe Yookassa::Payment do
     it_behaves_like "returns_payment_object"
   end
 
-  describe "#get_payment_info" do
+  describe "#find" do
     let(:payment_id) { "2490ded1-000f-5000-8000-1f64111bc63e" }
     let(:url) { "https://api.yookassa.ru/v3/payments/#{payment_id}" }
 
-    subject { payment.get_payment_info(payment_id: payment_id) }
+    subject { payment.find(payment_id: payment_id) }
 
     it "sends a request" do
       subject

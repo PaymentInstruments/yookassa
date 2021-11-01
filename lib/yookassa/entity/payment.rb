@@ -16,6 +16,8 @@ module Yookassa
       # Payment ID in YooMoney.
       attribute :id, Types::String
 
+      attribute? :idempotency_key, Types::String
+
       # status [string, required]
       # Payment status. Possible values: pending, waiting_for_capture, succeeded, and canceled.
       # More about the life cycle of a payment https://yookassa.ru/en/developers/api#:~:text=life%20cycle%20of%20a%20payment%C2%A0

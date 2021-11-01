@@ -25,12 +25,34 @@ Or install it yourself as:
 
 ## Usage
 
+### Configuration
+
+First of all you need to setup credentials to use Yookassa.
+You can configure your instance of Yookassa once in a application booting time. Ex. if you use rails, just put these lines into initializer file
+
 ```ruby
-# Payment
+# config/initializers/yookassa.rb
 
-client = Yookassa::Payment.new(shop_id: 'shop_id', api_key: 'api_key')
+Yookassa.configure do |config|
+  config.shop_id = ENV.fetch('YOOKASSA_SHOP_ID') # or put your shop_id and api_key here directly
+  config.api_key = ENV.fetch('YOOKASSA_API_KEY') # can be taken from Rails.credentials too
+end
+```
 
-payment = {
+There are some cases, when you need to connect to different Yookassa accounts (say, your clients need to connect to Yookassa). That probably means that you run a marketplace or multitenant system. There is a solution for this one from Yookassa, see https://yookassa.ru/en/developers/special-solutions/checkout-for-platforms/basics or https://yookassa.ru/en/developers/partners-api/basics
+
+If that is not your case, and you still have multiple shop_ids and api_keys, and need to handle all of them under one application, then you need to instantiate clients inline
+
+```ruby
+client1 = Yookassa::Client.new(shop_id: 'shop_1', api_key: '123')
+client2 = Yookassa::Client.new(shop_id: 'shop_2', api_key: '456')
+```
+
+### Making Payments
+
+#### Creating payment
+```ruby
+payload = {
     amount: {
         value:    100,
         currency: 'RUB'
@@ -42,23 +64,31 @@ payment = {
     }
 }
 
-client.create(payment: payment)
+payment = Yookassa.payments.create(payment: payload)
 
-client.get_payment_info(payment_id: '12345')
+# or
 
-client.capture(payment_id: '12345')
+client = Yookassa::Client.new(shop_id: 'shop_1', api_key: '123')
+payment = client.payments.create(payment: payload)
+```
 
-client.cancel(payment_id: '12345')
+#### Other payment requests
 
-# Refund
+```ruby
+Yookassa.payments.find(payment_id: '12345')
+Yookassa.payments.capture(payment_id: '12345')
+Yookassa.payments.cancel(payment_id: '12345')
+```
 
-client = Yookassa::Refund.new(shop_id: 'shop_id', api_key: 'api_key')
+### Refunds
 
-client.create(payload: payload)
+```ruby
+payment = Yookassa.refunds.create(payment: payload)
 
-client.get_refund_info(payment_id: '12345')
+# or
 
-
+client = Yookassa::Client.new(shop_id: 'shop_1', api_key: '123')
+payment = client.refunds.create(payment: payload)
 ```
 
 ## Contributing
