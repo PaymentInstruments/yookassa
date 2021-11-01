@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    yookassa (0.1.0)
+    yookassa (0.2.0)
       dry-struct
       http (~> 5.0.1)
 
