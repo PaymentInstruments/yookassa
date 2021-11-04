@@ -7,6 +7,12 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 # Specify your gem's dependencies in yookassa.gemspec
 gemspec
 
+group :documentation do
+  gem "rack"
+  gem "webrick"
+  gem "yard"
+end
+
 group :development, :test do
   gem "pry"
   gem "pry-byebug", "~> 3.8.0"
