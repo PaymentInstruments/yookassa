@@ -3,6 +3,7 @@
 require "http"
 require_relative "./payments"
 require_relative "./refunds"
+require_relative "./webhooks"
 require_relative "./entity/error"
 
 module Yookassa
@@ -11,8 +12,13 @@ module Yookassa
 
     attr_reader :http
 
-    def initialize(shop_id:, api_key:)
-      @http = HTTP.basic_auth(user: shop_id, pass: api_key).headers(accept: "application/json")
+    def initialize(shop_id: nil, api_key: nil, auth_token: nil)
+      @http = HTTP.headers(accept: "application/json")
+      @http = if auth_token.nil?
+                @http.basic_auth(user: shop_id, pass: api_key)
+              else
+                @http.headers("Authorization: Bearer #{auth_token}")
+              end
     end
 
     def payments
@@ -21,6 +27,10 @@ module Yookassa
 
     def refunds
       @refunds ||= Refunds.new(self)
+    end
+
+    def webhooks
+      @webhooks ||= Webhooks.new(self)
     end
 
     def get(endpoint, query: {})
