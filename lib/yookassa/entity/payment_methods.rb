@@ -7,8 +7,16 @@ module Yookassa
   module Entity
     module PaymentMethod
       class Base < Dry::Struct
-        attribute :id, Types::String
-        attribute :saved, Types::Bool
+        # id [string, optional]
+        # Payment method ID.
+        attribute? :id, Types::String
+
+        # saved [boolean, optional]
+        # Saving payment methods allows conducting automatic recurring payments.
+        attribute? :saved, Types::Bool
+
+        # title [string, optional]
+        # Payment method name.
         attribute? :title, Types::String
       end
 

@@ -2,9 +2,12 @@
 
 require_relative "./entity/payment"
 require_relative "./entity/collection"
+require_relative "./contracts/payment_contract"
 
 module Yookassa
   class Payments
+    CreatePaymentError = Class.new(StandardError)
+
     def initialize(api)
       @api = api
     end
@@ -15,6 +18,8 @@ module Yookassa
     end
 
     def create(payment:, idempotency_key: SecureRandom.hex(10))
+      validate_payment!(payment)
+
       data = api.post("payments", payload: payment, idempotency_key: idempotency_key)
       Entity::Payment.new(**data.merge(idempotency_key: idempotency_key))
     end
@@ -37,5 +42,13 @@ module Yookassa
     private
 
     attr_reader :api
+
+    def validate_payment(data)
+      contract = Yookassa::Contracts::PaymentContract.new
+      result = contract.call(data)
+      return if result.success?
+
+      raise CreatePaymentError, result.errors.to_h
+    end
   end
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "dry-struct"
+require "dry-validation"
 require "forwardable"
 require "yookassa/version"
 require "yookassa/config"
