@@ -62,7 +62,7 @@ module Yookassa
       # confirmation [object, optional]
       # Selected payment confirmation scenario. For payments requiring confirmation from the user.
       # More about confirmation scenarios https://yookassa.ru/en/developers/api#:~:text=confirmation,from%20the%20user.%20More%20about%20confirmation%20scenarios%C2%A0
-      attribute? :confirmation, Entity::Confirmation
+      attribute? :confirmation, Entity::Confirmations
 
       # test [boolean, required]
       # The attribute of a test transaction.

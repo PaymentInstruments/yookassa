@@ -27,7 +27,7 @@ RSpec.describe Yookassa::Payments do
       expect(subject.amount.currency).to eq "RUB"
       expect(subject.amount.value).to eq 10.0
 
-      expect(subject.confirmation).to be_a Yookassa::Entity::Confirmation
+      expect(subject.confirmation).to be_a Yookassa::Entity::Confirmation::Redirect
       expect(subject.confirmation.confirmation_url).to eq "https://money.yookassa.ru/payments/external/confirmation?orderId=2490ded1-000f-5000-8000-1f64111bc63e"
       expect(subject.confirmation.type).to eq "redirect"
       expect(subject.confirmation.return_url).to eq "https://url.test"
