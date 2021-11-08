@@ -18,10 +18,12 @@ module Yookassa
     end
 
     def create(payment:, idempotency_key: SecureRandom.hex(10))
-      validate_payment!(payment)
+      # validate_payment(payment)
 
       data = api.post("payments", payload: payment, idempotency_key: idempotency_key)
       Entity::Payment.new(**data.merge(idempotency_key: idempotency_key))
+    rescue CreatePaymentError => e
+      e
     end
 
     def capture(payment_id:, idempotency_key: SecureRandom.hex(10))
@@ -48,7 +50,7 @@ module Yookassa
       result = contract.call(data)
       return if result.success?
 
-      raise CreatePaymentError, result.errors.to_h
+      raise CreatePaymentError, result
     end
   end
 end

@@ -2,6 +2,9 @@
 
 require "dry-struct"
 require "dry-validation"
+
+Dry::Schema.load_extensions(:struct)
+
 require "forwardable"
 require "yookassa/version"
 require "yookassa/config"
