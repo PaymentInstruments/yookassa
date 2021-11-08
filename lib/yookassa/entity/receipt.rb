@@ -17,11 +17,11 @@ module Yookassa
       # Store's tax system. The parameter is only required if you use several tax systems.
       # Otherwise, the parameter is not specified. List of possible values:
       # https://yookassa.ru/en/developers/54fz/parameters-values#tax-systems
-      attribute? :tax_system_code, Types::Integer
+      attribute? :tax_system_code, Types::Coercible::Integer
 
       # User's phone number for sending the receipt. Set in the ITU-T E.164 format, for example, 79000000000.
       # !DEPRECATED PARAMETER: we recommend specifying the details in the receipt.customer.phone parameter.
-      attribute? :phone, Types::String
+      attribute? :phone, Types::Coercible::String
 
       # User's email address for sending the receipt.
       # !DEPRECATED PARAMETER: we recommend specifying the details in the receipt.customer.email parameter.

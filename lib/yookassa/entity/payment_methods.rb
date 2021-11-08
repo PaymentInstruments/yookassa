@@ -7,16 +7,8 @@ module Yookassa
   module Entity
     module PaymentMethod
       class Base < Dry::Struct
-        # id [string, required]
-        # Payment method ID.
         attribute :id, Types::String
-
-        # saved [boolean, required]
-        # Saving payment methods allows conducting automatic recurring payments .
         attribute :saved, Types::Bool
-
-        # title [string, optional]
-        # Payment method name.
         attribute? :title, Types::String
       end
 
@@ -90,18 +82,18 @@ module Yookassa
       end
     end
 
-    PaymentMethods =  PaymentMethod::BankCard |
-                      PaymentMethod::Alfabank |
-                      PaymentMethod::YooMoney |
-                      PaymentMethod::Sberbank |
-                      PaymentMethod::ApplePay |
-                      PaymentMethod::Cash |
-                      PaymentMethod::DirectCarrierBilling |
-                      PaymentMethod::GooglePay |
-                      PaymentMethod::Installments |
-                      PaymentMethod::Qiwi |
-                      PaymentMethod::Tinkoff |
-                      PaymentMethod::Wechat |
-                      PaymentMethod::Webmoney
+    PaymentMethods = PaymentMethod::BankCard |
+                     PaymentMethod::Alfabank |
+                     PaymentMethod::YooMoney |
+                     PaymentMethod::Sberbank |
+                     PaymentMethod::ApplePay |
+                     PaymentMethod::Cash |
+                     PaymentMethod::DirectCarrierBilling |
+                     PaymentMethod::GooglePay |
+                     PaymentMethod::Installments |
+                     PaymentMethod::Qiwi |
+                     PaymentMethod::Tinkoff |
+                     PaymentMethod::Wechat |
+                     PaymentMethod::Webmoney
   end
 end

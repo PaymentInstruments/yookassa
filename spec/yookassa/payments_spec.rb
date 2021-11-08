@@ -98,4 +98,28 @@ RSpec.describe Yookassa::Payments do
 
     it_behaves_like "returns_payment_object"
   end
+
+  describe "#list" do
+    let(:body) { File.read("spec/fixtures/payments_list_response.json") }
+
+    let(:filters) do
+      {
+        limit: 20,
+        "created_at.gt": "2018-07-18T10:51:18.139Z"
+      }
+    end
+
+    let(:url) { "https://api.yookassa.ru/v3/payments?limit=20&created_at.gt=2018-07-18T10:51:18.139Z" }
+
+    subject { payment.list(filters: filters) }
+
+    it "sends a request" do
+      subject
+      expect(a_request(:get, url)).to have_been_made
+    end
+
+    it "returns a collection" do
+      expect(subject).to be_a Yookassa::Entity::PaymentCollection
+    end
+  end
 end

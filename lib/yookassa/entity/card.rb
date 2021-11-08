@@ -9,11 +9,11 @@ module Yookassa
       # First 6 digits of the card’s number (BIN). For payments with bank cards saved in YooMoney
       # and other services, the specified BIN might not correspond with the last4, expiry_year, expiry_month values.
       # For payments with bank cards saved in Apple Pay or Google Pay, the parameter contains Device Account Number.
-      attribute? :first6, Types::String
+      attribute? :first6, Types::Coercible::Integer
 
       # last4 [string, required]
       # Last 4 digits of the card's number.
-      attribute :last4, Types::String
+      attribute :last4, Types::Coercible::Integer
 
       # expiry_month [string, required]
       # Expiration date, month, MM.

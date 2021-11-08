@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "./entity/payment"
+require_relative "./entity/collection"
 
 module Yookassa
   class Payments
@@ -26,6 +27,11 @@ module Yookassa
     def cancel(payment_id:, idempotency_key: SecureRandom.hex(10))
       data = api.post("payments/#{payment_id}/cancel", idempotency_key: idempotency_key)
       Entity::Payment.new(**data.merge(idempotency_key: idempotency_key))
+    end
+
+    def list(filters: {})
+      data = api.get("payments", query: filters)
+      Entity::PaymentCollection.new(**data)
     end
 
     private

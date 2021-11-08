@@ -35,7 +35,7 @@ module Yookassa
 
       # description [string, optional]
       # Reason behind the refund.
-      attribute :description, Types::String
+      attribute? :description, Types::String
 
       # sources [array, optional]
       # Information about money held for refunds: the amount to be held and the stores getting the refunds.
