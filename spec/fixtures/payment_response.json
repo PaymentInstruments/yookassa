@@ -19,8 +19,8 @@
     "saved": false
   },
   "recipient": {
-    "account_id": "54401",
-    "gateway_id": "289250"
+    "account_id": 54401,
+    "gateway_id": 289250
   },
   "refundable": false,
   "test": true

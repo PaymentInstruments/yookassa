@@ -5,8 +5,8 @@ require_relative "./types"
 module Yookassa
   module Entity
     class Recipient < Dry::Struct
-      attribute :account_id, Types::String
-      attribute :gateway_id, Types::String
+      attribute :account_id, Types::Coercible::Integer
+      attribute :gateway_id, Types::Coercible::Integer
     end
   end
 end
