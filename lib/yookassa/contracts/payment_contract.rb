@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 require_relative "../entity/types"
-require_relative '../entity/airline'
-require_relative '../entity/amount'
-require_relative '../entity/confirmation'
-require_relative '../entity/payment_methods'
-require_relative '../entity/recipient'
-require_relative '../entity/receipt'
-require_relative '../entity/transfer'
+require_relative "../entity/airline"
+require_relative "../entity/amount"
+require_relative "../entity/confirmation"
+require_relative "../entity/payment_methods"
+require_relative "../entity/recipient"
+require_relative "../entity/receipt"
+require_relative "../entity/transfer"
 
 module Yookassa
   module Contracts
