@@ -3,6 +3,7 @@
 require "http"
 require_relative "./payments"
 require_relative "./refunds"
+require_relative "./receipts"
 require_relative "./entity/error"
 
 module Yookassa
@@ -21,6 +22,10 @@ module Yookassa
 
     def refunds
       @refunds ||= Refunds.new(self)
+    end
+
+    def receipts
+      @receipts ||= Receipts.new(self)
     end
 
     def get(endpoint, query: {})

@@ -44,7 +44,7 @@ RSpec.describe Yookassa::Payments do
   end
 
   describe "#create" do
-    let(:params) { JSON.parse(File.read("spec/fixtures/payment.json")) }
+    let(:params) { JSON.parse(File.read("spec/fixtures/payment_request.json")) }
     let(:url) { "https://api.yookassa.ru/v3/payments" }
 
     subject { payment.create(payment: params, idempotency_key: idempotency_key) }
@@ -100,7 +100,7 @@ RSpec.describe Yookassa::Payments do
   end
 
   describe "#list" do
-    let(:body) { File.read("spec/fixtures/payments_list_response.json") }
+    let(:body) { File.read("spec/fixtures/list_payment_response.json") }
 
     let(:filters) do
       {
