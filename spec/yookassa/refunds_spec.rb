@@ -25,7 +25,7 @@ RSpec.describe Yookassa::Refunds do
   end
 
   describe "#create" do
-    let(:payload) { JSON.parse(File.read("spec/fixtures/refund.json")) }
+    let(:payload) { JSON.parse(File.read("spec/fixtures/refund_request.json")) }
     let(:url) { "https://api.yookassa.ru/v3/refunds" }
 
     subject { refund.create(payload: payload, idempotency_key: idempotency_key) }
@@ -53,7 +53,7 @@ RSpec.describe Yookassa::Refunds do
   end
 
   describe "#list" do
-    let(:body) { File.read("spec/fixtures/refunds_list_response.json") }
+    let(:body) { File.read("spec/fixtures/list_refund_response.json") }
 
     let(:filters) do
       {

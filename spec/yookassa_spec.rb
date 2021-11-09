@@ -41,4 +41,16 @@ RSpec.describe Yookassa do
       expect(Yookassa.payments).to be_a(Yookassa::Payments)
     end
   end
+
+  describe ".refunds" do
+    it "delegates request to client and creates an instance" do
+      expect(Yookassa.refunds).to be_a(Yookassa::Refunds)
+    end
+  end
+
+  describe ".receipts" do
+    it "delegates request to client and creates an instance" do
+      expect(Yookassa.receipts).to be_a(Yookassa::Receipts)
+    end
+  end
 end

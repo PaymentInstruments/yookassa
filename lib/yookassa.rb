@@ -26,6 +26,6 @@ module Yookassa
       @client ||= Client.new(shop_id: @config.shop_id, api_key: @config.api_key)
     end
 
-    def_delegators :client, :payments, :refunds
+    def_delegators :client, :payments, :refunds, :receipts
   end
 end

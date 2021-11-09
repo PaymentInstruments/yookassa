@@ -1,22 +1,43 @@
 # frozen_string_literal: true
 
+require_relative "./types"
 require_relative "./amount"
+require_relative "./supplier"
 
 module Yookassa
   module Entity
     class Product < Dry::Struct
+      VatCodes = Types::Coercible::Integer.enum(
+        1 => "VAT not included",
+        2 => "0% VAT rate",
+        3 => "10% VAT rate",
+        4 => "20% receipt’s VAT rate",
+        5 => "10/110 receipt’s estimate VAT rate",
+        6 => "20/120 receipt’s estimate VAT rate"
+      )
+
+      AgentTypes = Types::String.enum(
+        "banking_payment_agent",
+        "banking_payment_subagent",
+        "payment_agent",
+        "payment_subagent",
+        "attorney",
+        "commissioner",
+        "agent"
+      )
+
       # Product name (maximum 128 characters).
       attribute :description, Types::String
 
       # Product quantity. Maximum possible value depends on the model of your online sales register.
-      attribute :quantity, Types::String
+      attribute :quantity, Types::Coercible::Float
 
       # Product price
-      attribute :amount, Yookassa::Entity::Amount
+      attribute :amount, Amount
 
       # VAT rate. Possible value is a number from 1 to 6. More about VAT rates codes
       # https://yookassa.ru/en/developers/54fz/parameters-values#vat-codes
-      attribute :vat_code, Types::Integer
+      attribute :vat_code, VatCodes
 
       # Payment subject attribute. List of possible values: https://yookassa.ru/en/developers/54fz/parameters-values#payment-subject
       attribute? :payment_subject, Types::String
@@ -42,6 +63,16 @@ module Yookassa
       # Amount of excise tax on products including kopeks. Decimal number with 2 digits after the period.
       # Online sales register that support this parameter: Orange Data, Kit Invest.
       attribute? :excise
+
+      # Information about the supplier of product or service. You can specify this parameter if you send the data
+      # for creating the receipt using the Receipt after payment scenario.
+      attribute? :supplier, Supplier
+
+      # Type of agent selling goods or services. The parameter is provided for by the format of fiscal documents (FFD)
+      # and is considered mandatory for versions 1.1 and later. https://yookassa.ru/en/developers/54fz/parameters-values#agent-type
+      # You can send it if your online sales register is updated to FFD 1.1
+      # and if you send the data for creating the receipt using the Receipt after payment scenario
+      attribute? :agent_type, AgentTypes
     end
   end
 end

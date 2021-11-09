@@ -1,0 +1,71 @@
+{
+  "type": "list",
+  "items": [
+    {
+      "id": "rt_1da5c87d-0984-50e8-a7f3-8de646dd9ec9",
+      "type": "payment",
+      "payment_id": "215d8da0-000f-50be-b000-0003308c89be",
+      "status": "succeeded",
+      "fiscal_document_number": "3986",
+      "fiscal_storage_number": "9288000100115785",
+      "fiscal_attribute": "2617603921",
+      "registered_at": "2019-05-13T17:56:00.000+03:00",
+      "fiscal_provider_id": "fd9e9404-eaca-4000-8ec9-dc228ead2345",
+      "items": [
+        {
+          "description": "Сapybara",
+          "quantity": 5.000,
+          "amount": {
+            "value": "2500.50",
+            "currency": "RUB"
+          },
+          "vat_code": 2,
+          "payment_mode": "full_payment",
+          "payment_subject": "commodity"
+        }
+      ],
+      "tax_system_code": 1
+    },
+    {
+      "id": "rt_2da5c87d-0384-50e8-a7f3-8d5646dd9e10",
+      "type": "payment",
+      "payment_id": "215d8da0-000f-50be-b000-0003308c89be",
+      "status": "pending",
+      "items": [
+        {
+          "description": "Сapybara",
+          "quantity": 5.000,
+          "amount": {
+            "value": "1500.30",
+            "currency": "RUB"
+          },
+          "vat_code": 2,
+          "payment_mode": "full_payment",
+          "payment_subject": "commodity"
+        }
+      ],
+      "tax_system_code": 1
+    },
+    {
+      "id": "rt_37a5c87d-3984-51e8-a7f3-8de646d39ec15",
+      "type": "refund",
+      "refund_id": "234d8da0-000f-50be-b000-0003308c89be",
+      "status": "pending",
+      "items": [
+        {
+          "description": "Сapybara",
+          "quantity": 5.000,
+          "amount": {
+            "value": "2500.50",
+            "currency": "RUB"
+          },
+          "vat_code": 2,
+          "payment_mode": "full_payment",
+          "payment_subject": "commodity"
+        }
+      ],
+      "tax_system_code": 1
+    }
+  ],
+  "next_cursor": "rt_67a4g56e-8487-56d4-a7f3-7yu646s78ec48"
+}
