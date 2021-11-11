@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './entity/webhook'
+require_relative './entity/collection'
 
 module Yookassa
   class Webhooks
