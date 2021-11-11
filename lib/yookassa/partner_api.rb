@@ -35,12 +35,11 @@ module Yookassa
       HTTP.headers("Authorization" => "Bearer #{oauth_token}")
           .headers("Idempotence-Key" => idempotency_key)
           .delete("#{API_URL}#{endpoint}")
-      end
     end
 
     private
 
-    attr_reader :oauth_token
+    attr_reader :http
 
     def api_call
       response = yield if block_given?

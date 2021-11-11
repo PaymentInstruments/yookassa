@@ -28,8 +28,6 @@ module Yookassa
       @receipts ||= Receipts.new(self)
     end
 
-    private
-
     def get(endpoint, query: {})
       api_call { http.get("#{API_URL}#{endpoint}", params: query) }
     end
@@ -37,6 +35,8 @@ module Yookassa
     def post(endpoint, idempotency_key:, payload: {})
       api_call { http.headers("Idempotence-Key" => idempotency_key).post("#{API_URL}#{endpoint}", json: payload) }
     end
+
+    private
 
     def api_call
       response = yield if block_given?

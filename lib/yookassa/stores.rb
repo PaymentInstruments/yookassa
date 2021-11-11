@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './entity/store_info'
+require_relative "./entity/store_info"
 
 module Yookassa
   class Stores
