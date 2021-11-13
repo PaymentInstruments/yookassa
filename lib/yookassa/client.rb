@@ -33,6 +33,10 @@ module Yookassa
       api_call { http.headers("Idempotence-Key" => idempotency_key).post("#{API_URL}#{endpoint}", json: payload) }
     end
 
+    def delete(endpoint, idempotency_key:)
+      api_call { http.headers("Idempotence-Key" => idempotency_key).delete("#{API_URL}#{endpoint}") }
+    end
+
     def api_call
       response = yield if block_given?
       body = JSON.parse(response.body.to_s, symbolize_names: true)
