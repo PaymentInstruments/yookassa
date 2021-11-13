@@ -21,11 +21,17 @@ module Yookassa
     end
 
     def client
-      raise ConfigError, "Specify `shop_id` and `api_key` settins in a `.configure` block" if @config.nil?
+      raise ConfigError, "Specify `shop_id` and `api_key` settings in a `.configure` block" if @config.nil?
 
       @client ||= Client.new(shop_id: @config.shop_id, api_key: @config.api_key)
     end
 
+    def partner_api
+      @partner_api ||= PartnerAPI.new
+    end
+
     def_delegators :client, :payments, :refunds, :receipts
+
+    def_delegators :partner_api, :stores, :webhooks
   end
 end
