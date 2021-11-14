@@ -67,7 +67,7 @@ client = Yokassa::PartnerAPI.new(oauth_token: "token-XXXXXXXX")
 store_info = client.stores.info
 ```
 В результате мы увидим примерно следующее:
-```
+```ruby
 #0 dict(5)
   ['account_id'] => str(6) "XXXXXX"
   ['test'] => bool(True)
@@ -91,7 +91,7 @@ store_info = client.stores.info
 А так же проверяем, не установлены ли уже вебхуки. И если установлены на неверный адрес, удаляем.
 
 ```ruby
-url = 'https://merchant-site.ru/payment-notification'
+url = "https://merchant-site.ru/payment-notification"
 expected_events = [
   "payment.succeeded",
   "payment.canceled"
@@ -118,7 +118,7 @@ end
 ```
 
 В результате мы увидим примерно следующее:
-```
+```ruby
 #0 object(WebhookList) (2)
   _WebhookList__items => list(2)
     [0] => object(WebhookResponse) (3)
