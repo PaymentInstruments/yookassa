@@ -1,4 +1,5 @@
 # YooKassa API Ruby Client
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8b46deba7dab4b9f98bc98d4a1eb24d2)](https://app.codacy.com/gh/PaymentInstruments/yookassa?utm_source=github.com&utm_medium=referral&utm_content=PaymentInstruments/yookassa&utm_campaign=Badge_Grade_Settings)
 [![Github Actions](https://github.com/PaymentInstruments/yookassa/actions/workflows/main.yml/badge.svg)](https://github.com/PaymentInstruments/yookassa/actions/workflows/main.yml)
 [![Gem Version][gem-badger]][gem]
 [![License](https://img.shields.io/github/license/paderinandrey/yookassa.svg)](https://github.com/paderinandrey/yookassa)
