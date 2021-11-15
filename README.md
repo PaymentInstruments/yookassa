@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/github/license/paderinandrey/yookassa.svg)](https://github.com/paderinandrey/yookassa)
 
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a184dcf77c64487f96aa9e6c3a1cf3ea)](https://www.codacy.com/gh/PaymentInstruments/yookassa/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=PaymentInstruments/yookassa&amp;utm_campaign=Badge_Grade)
 [gem-badger]: https://img.shields.io/gem/v/yookassa.svg?style=flat&color=blue
 [gem]: https://rubygems.org/gems/yookassa
 

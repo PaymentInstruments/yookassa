@@ -29,3 +29,14 @@ jobs:
       run: bundle exec rubocop
     - name: Rspec
       run: bundle exec rspec
+
+  coverage:
+    runs-on: ubuntu-latest
+    name: Coverage
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run codacy-coverage-reporter
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          api-token: ${{ secrets.CODACY_API_TOKEN }}
+          coverage-reports: coverage/coverage.xml
