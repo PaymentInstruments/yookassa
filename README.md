@@ -44,8 +44,8 @@ There are some cases, when you need to connect to different Yookassa accounts (s
 If that is not your case, and you still have multiple shop_ids and api_keys, and need to handle all of them under one application, then you need to instantiate clients inline
 
 ```ruby
-client1 = Yookassa::Client.new(shop_id: 'shop_1', api_key: '123')
-client2 = Yookassa::Client.new(shop_id: 'shop_2', api_key: '456')
+client1 = Yookassa::Payments.new(shop_id: 'shop_1', api_key: '123')
+client2 = Yookassa::Payments.new(shop_id: 'shop_2', api_key: '456')
 ```
 
 ### Making Payments
@@ -68,8 +68,8 @@ payment = Yookassa.payments.create(payment: payload)
 
 # or
 
-client = Yookassa::Client.new(shop_id: 'shop_1', api_key: '123')
-payment = client.payments.create(payment: payload)
+payments = Yookassa::Payments.new(shop_id: 'shop_1', api_key: '123')
+payment = payments.create(payment: payload)
 ```
 
 #### Other payment requests

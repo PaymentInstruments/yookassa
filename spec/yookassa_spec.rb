@@ -19,23 +19,6 @@ RSpec.describe Yookassa do
     end
   end
 
-  describe ".client" do
-    context "when no settings are provided" do
-      before { Yookassa.instance_variable_set(:@config, nil) }
-
-      it "raises an error" do
-        expect { Yookassa.client }.to raise_error(Yookassa::ConfigError)
-      end
-    end
-
-    context "when instance configured" do
-      it "creates and stores client" do
-        expect(Yookassa.client).to be_a(Yookassa::Client)
-        expect(Yookassa.client).to eq(Yookassa.client)
-      end
-    end
-  end
-
   describe ".payments" do
     it "delegates request to client and creates an instance" do
       expect(Yookassa.payments).to be_a(Yookassa::Payments)
