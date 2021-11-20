@@ -74,8 +74,6 @@ payload = {
 
 idempotency_key = SecureRandom.hex(10)
 res = Yookassa.payments.create(payload: payload, idempotency_key: idempotency_key)
-
-var_dump.var_dump(res)
 ```
 ---
 

@@ -28,10 +28,10 @@ Yookassa.configure do |c|
 end
 
 # instance
-client = Yookassa::Client.new(shop_id: "XXXXXX", api_key: "test_XXXXXXXX")
+client = Yookassa::Payments.new(shop_id: "XXXXXX", api_key: "test_XXXXXXXX")
 
 # или OAuth-токен
-client = Yokassa::PartnerAPI.new(oauth_token: "token-XXXXXXXX")
+client = Yokassa::Webhooks.new(oauth_token: "token-XXXXXXXX")
 ```
 
 ---
@@ -45,8 +45,6 @@ client = Yokassa::PartnerAPI.new(oauth_token: "token-XXXXXXXX")
 
 Например, это может выглядеть так:
 ```ruby
-from yookassa import Configuration
-from yookassa.domain.common.user_agent import Version
 
 Configuration.configure_user_agent(
   framework=Version('Django', '2.2.3'),
@@ -62,9 +60,9 @@ Configuration.configure_user_agent(
 После установки конфигурации можно проверить корректность данных, а также получить информацию о магазине.
 
 ```ruby
-client = Yokassa::PartnerAPI.new(oauth_token: "token-XXXXXXXX")
+store = Yokassa::Stores.new(oauth_token: "token-XXXXXXXX")
 
-store_info = client.stores.info
+store_info = store.info
 ```
 В результате мы увидим примерно следующее:
 ```ruby
@@ -97,8 +95,8 @@ expected_events = [
   "payment.canceled"
 ]
 
-partner_client = Yokassa::PartnerAPI.new(oauth_token: "token-XXXXXXXX")
-webhooks = partner_client.webhooks.list
+webhooks_client = Yokassa::Webhoooks.new(oauth_token: "token-XXXXXXXX")
+webhooks = webhooks_client.list
 
 expected_events.each do |event|
   hook_exists = false
@@ -109,11 +107,11 @@ expected_events.each do |event|
     if url == hook.url
       hook_exists = true
     else
-      partner_client.webhooks.delete(webhook_id: hook.id)
+      webhooks_client.delete(webhook_id: hook.id)
     end
   end
 
-  partner_client.webhooks.create(payload: {event: event, url: url}) unless hook_exists
+  webhooks_client.create(payload: {event: event, url: url}) unless hook_exists
 end
 ```
 
@@ -155,11 +153,6 @@ end
 #### Пример обработки уведомления с помощью SDK
 
 ```ruby
-import json
-from django.http import HttpResponse
-from yookassa import Configuration, Payment
-from yookassa.domain.notification import WebhookNotificationEventType, WebhookNotification
-
 def my_webhook_handler(request):
   # Извлечение JSON объекта из тела запроса
   event_json = json.loads(request.body)
