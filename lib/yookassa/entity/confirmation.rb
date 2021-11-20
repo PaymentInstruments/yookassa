@@ -16,7 +16,7 @@ module Yookassa
         attribute :type, Types.Value("embedded")
 
         # Token for the YooMoney Checkout Widget initialization.
-        attribute? :confirmation_token, Types::String
+        attribute :confirmation_token, Types::String
       end
 
       class External < Base
@@ -39,14 +39,14 @@ module Yookassa
         attribute :type, Types.Value("qr")
 
         # Data for generating the QR code.
-        attribute? :confirmation_data, Types::String
+        attribute :confirmation_data, Types::String
       end
 
       class Redirect < Base
         attribute :type, Types.Value("redirect")
 
         # The URL that the user will be redirected to for payment confirmation.
-        attribute? :confirmation_url, Types::String
+        attribute :confirmation_url, Types::String
 
         # A request for making a payment with authentication by 3-D Secure. It works if you accept
         # bank card payments without user confirmation by default. In other cases, the 3-D Secure
@@ -56,7 +56,7 @@ module Yookassa
 
         # The URL that the user will return to after confirming or canceling the payment on the webpage.
         # Maximum 2048 characters.
-        attribute :return_url, Types::String
+        attribute? :return_url, Types::String
       end
     end
 
