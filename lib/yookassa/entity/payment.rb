@@ -25,13 +25,13 @@ module Yookassa
 
       # amount [object, required]
       # Payment amount. Sometimes YooMoney's partners charge additional commission from the users that is not included in this amount.
-      attribute :amount, Entity::Amount
+      attribute :amount, Amount
 
       # income_amount [object, optional]
       # Amount of payment to be received by the store: the amount value minus the YooMoney commission.
       # If you're a partner  using an OAuth token for request authentication, make a request to the store for a right
       # to get information about commissions on payments.
-      attribute? :income_amount, Entity::Amount
+      attribute? :income_amount, Amount
 
       # description [string, optional]
       # Description of the transaction (maximum 128 characters) displayed in your YooMoney Merchant Profile,
@@ -40,11 +40,11 @@ module Yookassa
 
       # recipient [object, required]
       # Payment recipient.
-      attribute :recipient, Entity::Recipient
+      attribute :recipient, Recipient
 
       # payment_method [object, optional]
       # Payment method  used for this payment.
-      attribute? :payment_method, Entity::PaymentMethods
+      attribute? :payment_method, PaymentMethods
 
       # captured_at [datetime, optional]
       # Time of payment capture, based on UTC and specified in the ISO 8601 format. "2018-07-18T10:51:18.139Z"
@@ -62,7 +62,7 @@ module Yookassa
       # confirmation [object, optional]
       # Selected payment confirmation scenario. For payments requiring confirmation from the user.
       # More about confirmation scenarios https://yookassa.ru/en/developers/api#:~:text=confirmation,from%20the%20user.%20More%20about%20confirmation%20scenarios%C2%A0
-      attribute? :confirmation, Entity::Confirmations
+      attribute? :confirmation, Confirmations
 
       # test [boolean, required]
       # The attribute of a test transaction.
@@ -70,7 +70,7 @@ module Yookassa
 
       # refunded_amount [object, optional]
       # The amount refunded to the user. Specified if the payment has successful refunds.
-      attribute? :refunded_amount, Entity::Amount
+      attribute? :refunded_amount, Amount
 
       # paid [boolean, required]
       # The attribute of a paid order.
@@ -97,11 +97,11 @@ module Yookassa
       # cancellation_details [object, optional]
       # Commentary to the canceled status: who and why canceled the payment.
       # More about canceled payments https://yookassa.ru/en/developers/api#:~:text=cancellation_details,about%20canceled%20payments%C2%A0
-      attribute? :cancellation_details, Entity::CancellationDetails
+      attribute? :cancellation_details, CancellationDetails
 
       # authorization_details [object, optional]
       # Payment authorization details.
-      attribute? :authorization_details, Entity::AuthorizationDetails
+      attribute? :authorization_details, AuthorizationDetails
 
       # transfers [array, optional]
       # Information about money distribution: the amounts of transfers and the stores to be transferred to.

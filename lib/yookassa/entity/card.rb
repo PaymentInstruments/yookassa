@@ -17,11 +17,11 @@ module Yookassa
 
       # expiry_month [string, required]
       # Expiration date, month, MM.
-      attribute :expiry_month, Types::Coercible::Integer
+      attribute? :expiry_month, Types::Coercible::Integer
 
       # expiry_year [string, required]
       # Expiration date, year, YYYY.
-      attribute :expiry_year, Types::Coercible::Integer
+      attribute? :expiry_year, Types::Coercible::Integer
 
       # card_type [string, required]
       # Type of bank card. Possible values: MasterCard (for Mastercard and Maestro cards), Visa (for Visa and Visa Electron cards),
