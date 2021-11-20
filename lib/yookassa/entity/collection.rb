@@ -5,6 +5,7 @@ require_relative "./payment"
 require_relative "./receipt"
 require_relative "./refund"
 require_relative "./webhook"
+require_relative "./deal"
 
 module Yookassa
   module Entity
@@ -25,8 +26,8 @@ module Yookassa
       attribute :items, Types::Array.of(Receipt)
     end
 
-    class WebhookCollection < Collection
-      attribute :items, Types::Array.of(Webhook)
+    class DealsCollection < Collection
+      attribute :items, Types::Array.of(Deal)
     end
   end
 end
