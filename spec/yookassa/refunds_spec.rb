@@ -2,9 +2,8 @@
 
 RSpec.describe Yookassa::Refunds do
   let(:config) { { shop_id: "SHOP_ID", api_key: "API_KEY" } }
-  let(:client) { Yookassa::Client.new(**config) }
+  let(:refund) { described_class.new(**config) }
   let(:idempotency_key) { SecureRandom.hex(1) }
-  let(:refund) { client.refunds }
   let(:body) { File.read("spec/fixtures/refund_response.json") }
 
   before { stub_request(:any, //).to_return(body: body, headers: { "Content-Type" => "application/json" }) }

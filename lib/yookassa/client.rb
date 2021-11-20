@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 require "http"
-require_relative "./payments"
-require_relative "./refunds"
-require_relative "./receipts"
 require_relative "./entity/error"
 
 module Yookassa
@@ -12,21 +9,21 @@ module Yookassa
 
     attr_reader :http
 
-    def initialize(shop_id:, api_key:)
-      @http = HTTP.basic_auth(user: shop_id, pass: api_key).headers(accept: "application/json")
+    def initialize(shop_id: Yookassa.config.shop_id, api_key: Yookassa.config.api_key, oauth_token: nil)
+      @http = HTTP.headers(accept: "application/json")
+
+      if shop_id && api_key
+        @http.basic_auth(user: shop_id, pass: api_key)
+      elsif oauth_token
+        @http.headers("Authorization" => "Bearer #{oauth_token}")
+      else
+        message = "Specify `shop_id` and `api_key` settings in a `.configure` block " \
+                  "or pass `oauth_token` to a client"
+        raise ConfigError, message
+      end
     end
 
-    def payments
-      @payments ||= Payments.new(self)
-    end
-
-    def refunds
-      @refunds ||= Refunds.new(self)
-    end
-
-    def receipts
-      @receipts ||= Receipts.new(self)
-    end
+    private
 
     def get(endpoint, query: {})
       api_call { http.get("#{API_URL}#{endpoint}", params: query) }
@@ -35,8 +32,6 @@ module Yookassa
     def post(endpoint, idempotency_key:, payload: {})
       api_call { http.headers("Idempotence-Key" => idempotency_key).post("#{API_URL}#{endpoint}", json: payload) }
     end
-
-    private
 
     def api_call
       response = yield if block_given?

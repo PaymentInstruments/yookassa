@@ -2,10 +2,9 @@
 
 RSpec.describe Yookassa::Payments do
   let(:config) { { shop_id: "SHOP_ID", api_key: "API_KEY" } }
-  let(:client) { Yookassa::Client.new(**config) }
+  let(:payment) { described_class.new(**config) }
   let(:idempotency_key) { SecureRandom.hex(1) }
 
-  let(:payment) { client.payments }
   let(:body) { File.read("spec/fixtures/payment_response.json") }
 
   before { stub_request(:any, //).to_return(body: body, headers: { "Content-Type" => "application/json" }) }
