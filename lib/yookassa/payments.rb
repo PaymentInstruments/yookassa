@@ -11,8 +11,11 @@ module Yookassa
       Entity::Payment.new(**data)
     end
 
-    def create(payment:, idempotency_key: SecureRandom.hex(10))
-      data = post("payments", payload: payment, idempotency_key: idempotency_key)
+    def create(payload = nil, idempotency_key: SecureRandom.hex(10))
+      request = build_request(payload)
+      request.validate!
+
+      data = post("payments", payload: request, idempotency_key: idempotency_key)
       Entity::Payment.new(**data.merge(idempotency_key: idempotency_key))
     end
 
@@ -29,6 +32,16 @@ module Yookassa
     def list(filters: {})
       data = get("payments", query: filters)
       Entity::PaymentCollection.new(**data)
+    end
+
+    private
+
+    def build_request(payload = nil)
+      case payload
+      when PaymentRequest then payload
+      when Hash then PaymentRequest.build(payload)
+      when NilClass then yield(PaymentRequest.new)
+      end
     end
   end
 end
